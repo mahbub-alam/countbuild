@@ -1,0 +1,29 @@
+Build Events->Post-build event command line:
+============================================
+To build signle configuration, use:
+-----------------------------------
+cd "$(ProjectDir)Properties"
+CountBuild.exe b++ build.txt AssemblyInfo.cs.template AssemblyInfo.cs
+
+
+To build multiple configuration (to make both conf file version same), use:
+---------------------------------------------------------------------------
+cd "$(ProjectDir)Properties"
+_CountBuild.bat $(ConfigurationName) b++ build.txt AssemblyInfo.cs.template AssemblyInfo.cs
+
+
+To build multiple configuration of multi-project solution (to make both conf file version same), use:
+------------------------------------------------------------------------------------------------------
+$(SolutionDir)CountBuild\_CountBuild.bat $(ConfigurationName) b++ $(ProjectDir)Properties\build.txt $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs
+
+NOTE: Put countbuild package in the same folder with solution file and put build.txt and build-conf.txt
+files in the 'properties' folder of each project.
+
+
+Build Rules:
+============
+Always build project in debug configuration.
+When release configruation is needed use batch build and build both conf.
+
+Instead of following alternative, file version of debug and release will not
+tha same and need few batch build to make the same.

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+OS=`uname`
+EXE=".exe"
+
+if [ "$OS" == 'Linux' ] || [ "$OS" == 'FreeBSD' ]; then
+   EXE=""
+fi
+
+BUILD_CONF=`cat $BASE_DIR/build-conf.txt`
+
+echo "Previous Build Configuration: <$BUILD_CONF>"
+
+if [ "$BUILD_CONF" == "Debug" ] && [ "$1" == "Debug" ]; then 
+	$BASE_DIR/countbuild$EXE $2 $3 $4 $5 $6
+elif [ "$BUILD_CONF" == "Release" ] && [ "$1" == "Release" ]; then 
+	$BASE_DIR/countbuild$EXE $2 $3 $4 $5 $6
+fi
+
+echo $1 > $BASE_DIR/build-conf.txt
+echo "Current Build Configuration: <$1>"
+echo ...Done

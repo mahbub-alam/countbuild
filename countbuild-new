@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+OS=`uname`
+EXE=".exe"
+
+if [ "$OS" == 'Linux' ] || [ "$OS" == 'FreeBSD' ]; then
+   EXE=""
+fi
+
+$BASE_DIR/countbuild$EXE newbuild build.txt
+echo "Debug" > build-conf.txt
